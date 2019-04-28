@@ -111,9 +111,7 @@ module.exports = app => {
       return;
     }
     passwd = app.service.encrypt(passwd);
-    console.log("password", passwd)
     const user = await model.findOne({ account, passwd })
-
     if (!!user) {
       // 生成token
       const token = jwt.sign({ 
