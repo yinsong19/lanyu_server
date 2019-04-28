@@ -8,9 +8,8 @@ module.exports = (app, router) => {
   router.get('/article/feedOrder', controller.getOrderArticles);
   router.get('/article/feedHot', controller.getHotArticles);
   router.get('/article/feed', controller.getUserArticles)
-  // router.post('/user/check', controller.checkAccountExist);
-  // router.post(`/user/register`, controller.register);
   router.post(`/article/like`, controller.likeArticle);
   router.post(`/article/unlike`, controller.unlikeArticle);
+  router.post(`/article/delete`, controller.deleteArticle);
   router.put('/article/edit', controller.updateById);
 }

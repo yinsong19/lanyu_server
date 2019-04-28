@@ -225,5 +225,18 @@ module.exports = app => {
     ctx.body = ({code: 'ok', data: result})
   }
 
+  // editUser
+  UserController.editUser = async ctx =>{
+    let { userId, nickname, gender, avatar, bio } = ctx.request.body
+    const result = await model.update({_id: userId}, {nickname, gender, avatar, bio})
+    if(result){
+      const user = await model.findOne({_id: userId}, ['-passwd'])
+      ctx.body = ({code: 'ok', data: user})
+    } else{
+      ctx.body = ({code: 'no', message: '修改出错'})
+    }
+  }
+
+
   return UserController
 }

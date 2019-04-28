@@ -11,5 +11,5 @@ module.exports = (app, router) => {
   router.post(`/user/login`, controller.login);
   router.get(`/user/myOrder`, controller.getUserOrder);
   router.post(`/user/cancleOrder`, controller.cancleUserOrder);
-  // router.patch('/user/:id', controller.updateById);
+  router.post('/user/edit', controller.editUser);
 }

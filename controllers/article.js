@@ -83,7 +83,7 @@ module.exports = app => {
   }
   
   /**
-   * 获取订阅用户文章(按时间)
+   * 获取热门文章(按时间)
    * @param {*} ctx 
    */
   ArticleController.getHotArticles = async ctx => {
@@ -97,20 +97,20 @@ module.exports = app => {
   }
 
     /**
-   * 获取订阅用户文章(按时间)
+   * 获取指定用户文章(按时间)
    * @param {*} ctx 
    */
   ArticleController.getUserArticles = async ctx => {
     let { page, userId } = ctx.request.query;
     let Articles = [];
     
-    let articles = await model.find({author: userId}).populate('author', '-passwd -_id').skip(page * 10).limit(10).sort({'_id':-1});
+    let articles = await model.find({author: userId}).populate('author', '-passwd').skip(page * 10).limit(10).sort({'_id':-1});
     Articles.push.apply(Articles, articles);
 
     ctx.body = { code: 'ok', data: Articles, next_page: Number(page) + 1 };
   }
 
-/**
+  /**
    * 用户点赞文章
    * @param {*} ctx 
    */
@@ -127,6 +127,10 @@ module.exports = app => {
     }
   }
 
+  /**
+   * 用户取消点赞文章
+   * @param {*} ctx 
+   */
   ArticleController.unlikeArticle = async ctx =>{
     let { userId, articleId } = ctx.request.body;
     
@@ -134,6 +138,17 @@ module.exports = app => {
       likeUsers: userId
     }});
 
+    ctx.body = { code: 'ok', data: result };
+  }
+
+    /**
+   * 用户删除文章
+   * @param {*} ctx 
+   */
+  ArticleController.deleteArticle = async ctx =>{
+    let { userId, articleId } = ctx.request.body;
+    
+    let result = await model.deleteOne({_id: articleId, author: userId});
     ctx.body = { code: 'ok', data: result };
   }
 
