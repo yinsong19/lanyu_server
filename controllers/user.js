@@ -22,6 +22,10 @@ module.exports = app => {
     if(!passwd){
       ctx.body = { code: 'no', message: '请输入密码'};
       return;
+    }
+    if(!passwd){
+      ctx.body = { code: 'no', message: '请输入密码'};
+      return;
     } 
     passwd = app.service.encrypt(passwd);
     const result = await model.create({ account, passwd, nickname, avatar, gender, bio }).catch(e => {
@@ -152,9 +156,9 @@ module.exports = app => {
     pageSize = +pageSize
     const skip = page === 0 ? 0 : (page - 1) * pageSize
 
-    // const can = await app.service.isAdmin(userId)
+    const can = await app.service.isAdmin(userId)
 
-    if (1) {
+    if (can) {
       const users = await model.find().limit(pageSize).skip(skip)
       const total = await model.find().count()
       ctx.body = ({ status: 'ok', message: '获取用户列表成功', data: { 

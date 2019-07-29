@@ -9,7 +9,9 @@ module.exports = app => {
   }
   const options = {
     reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 500
+    reconnectInterval: 500,
+    useNewUrlParser: true,
+    useCreateIndex: true
   };
 
   mongoose.connect(url, options);

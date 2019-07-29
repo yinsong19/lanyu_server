@@ -16,7 +16,7 @@ module.exports = {
   token: {
     secret: 'lanyu',
     expires: '4h',
-    unlesses: [/^\/api\/v1\/user/, /^\/api\/v1\/article/, /^\/api\/v1\/classify/, /^\/api\/v1\/tag/]
+    unlesses: [/^\/api\/v1\/user\/login/, /^\/api\/v1\/user\/register/,/^\/api\/v1\/upload\/upload/]
   },
   router: {
     prefix: '/api/v1/'

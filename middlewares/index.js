@@ -7,7 +7,7 @@ module.exports = app => {
   const secret = app.config.token.secret;
   const unlesses = app.config.token.unlesses || [];
   
-  console.log(unlesses);
+  // console.log(unlesses);
 
   app.use(error());
   app.use(cors({
